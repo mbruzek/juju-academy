@@ -1,0 +1,38 @@
+load_lesson({
+  "name": "Scale services",
+  "description": [
+    "Juju allows services to scale easily to handle increased load through clustering or high availability.",
+    "Some charms make use of the Juju peer relation and additional units help spread out the load. This lesson will cover how to increase and decrease units."
+    "We will be exploring the juju <code>add-unit</code> and <code>remove-unit</code> subcommands which increase and decrease the number of units in a service.",
+    "In this lesson add a unit of WordPress to increase the scalability, and remove a unit when the demand has decreased.",
+    "Go to the <a href='https://manage.jujucharms.com/charms/precise/wordpress' target=_blank>WordPress charm page</a> to read more about the ability to the WordPress charm to scale out."
+
+  ],
+  "tasks": {
+    "00-add-unit-to-wordpress": {
+      "name": "To handle more traffic, add one additional unit to the WordPress service.",
+      "validate": "^juju add-unit (wordpress)$",
+      "hint": "To add one unit to the current deployment, use <code>juju add-unit [charm]</code>. The command <code>juju help add-unit</code> has additional information for the options of the add-unit command."
+    },
+    "01-juju-status": {
+      "name": "Make sure the unit was added to Juju.",
+      "validate": "^juju status$|^juju status wordpress$",
+      "hint": "To see how many units for the wordpress service use <code>juju status [charm]</code>. The command <code>juju help status</code> has additional information for the options for the status command."
+    },
+    "02-add-units-wordpress": {
+      "name": "Your site is very popular, the traffic has increased!  Add two additional units to the WordPress service.",
+      "validate": "^juju add-unit wordpress -n 2$",
+      "hint": "To add mulitple units use the <code>-n #</code> flag to the <code>add-unit</code> command."
+    },
+    "03-remove-units-wordpress": {
+      "name": "The traffic has dropped off, remove wordpress units to save money.",
+      "validate": "^juju remove-unit wordpress -n 3$",
+      "hint": "To remove units use the <code>juju remove-units [charm]</code>."
+    },
+    "04-juju-status": {
+      "name": "Make sure the units have been removed from the deployment.",
+      "validate": "^juju status$|^juju status wordpress$",
+      "hint": "To see how many units for the wordpress service use <code>juju status [charm]</code>. The command <code>juju help status</code> has additional information for the options for the status command."
+    }
+  }
+});
